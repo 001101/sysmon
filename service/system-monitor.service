@@ -1,0 +1,6 @@
+[Unit]
+Description=System monitoring and configuration checking service
+
+[Service]
+Type=oneshot
+ExecStart=/opt/monitor/bootstrap.sh

@@ -1,0 +1,9 @@
+[Unit]
+Description=system configuration and setup monitoring
+
+[Timer]
+Unit=synapse-backup.service
+OnCalendar=*-*-* 12:00:00
+
+[Install]
+WantedBy=timers.target
