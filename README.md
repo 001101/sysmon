@@ -5,14 +5,12 @@ system monitoring assistant to get notified of system issues without manual inte
 
 # install
 
+running as root
 ```
 cd /opt
 git clone https://github.com/epiphyte/system-monitor
 cd system-monitor
-systemctl enable /opt/system-monitor/service/system-monitor.timer
-ln -s /opt/system-monitor/service/system-monitor.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl start system-monitor.timer
+make install
 ```
 
 # updating
