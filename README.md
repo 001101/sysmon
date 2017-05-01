@@ -1,4 +1,4 @@
-monitor
+system-monitor
 ===
 
 system monitoring assistant to get notified of system issues without manual intervention
