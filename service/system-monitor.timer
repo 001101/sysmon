@@ -4,6 +4,7 @@ Description=System configuration and setup monitoring
 [Timer]
 Unit=system-monitor.service
 OnCalendar=*-*-* 12:00:00
+RandomizedDelaySec=900
 
 [Install]
 WantedBy=timers.target
