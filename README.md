@@ -15,6 +15,10 @@ systemctl daemon-reload
 systemctl start system-monitor
 ```
 
+# updating
+
+due to the bootstrap.sh script firing first, new rules will be automatically deployed, only settings need to be pushed
+
 # configuration
 
 ## conf.d
