@@ -1,6 +1,6 @@
 #!/bin/bash
-LOCATION=/opt/monitor/
-CONFIG=/opt/monitor/settings/
+LOCATION=/opt/system-monitor/
+CONFIG=${LOCATION}settings/
 COMMON=${CONFIG}common
 LOCAL=${CONFIG}local
 CONFD=${LOCATION}conf.d
