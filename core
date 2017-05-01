@@ -1,0 +1,54 @@
+#!/bin/bash
+LOCATION=/opt/monitor/
+CONFIG=/opt/monitor/settings/
+COMMON=${CONFIG}common
+LOCAL=${CONFIG}local
+CONFD=${LOCATION}conf.d
+REPORT_SUFFIX=".monitor"
+
+if [ -e "$COMMON" ]; then
+    source $COMMON
+fi
+
+if [ -e "$LOCAL" ]; then
+    source $LOCAL
+fi
+
+# file checking
+CHECK_SIZE=1
+NO_CHECK_SIZE=0
+
+# report an item
+function report-item()
+{
+    echo "$1 -> $2"
+}
+
+# file exists and populated
+function file-exist-size()
+{
+    if [ -e $1 ]; then
+        if [ $2 -eq $CHECK_SIZE ]; then
+            if [ ! -s $1 ]; then
+                report-item $1 "is empty/zero"
+            fi
+        fi
+    else
+        report-item $1 "does not exist..."
+    fi
+}
+
+# not empty file
+function not-empty()
+{
+    file-exist-size $1 $CHECK_SIZE
+}
+
+# service enabled
+function service-enabled()
+{
+    systemctl is-enabled $1 | grep -q "enabled"
+    if [ $? -ne 0 ]; then
+        report-item $1 "service not enabled..."
+    fi
+}
