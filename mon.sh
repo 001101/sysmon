@@ -1,5 +1,21 @@
 #!/bin/bash
 source $USE_CORE
+
+if [ -z "$MATRIX_API" ]; then
+    echo "matrix api host is required"
+    exit 1
+fi
+
+if [ -z "$MATRIX_ROOM" ]; then
+    echo "matrix room is required"
+    exit 1
+fi
+
+if [ -z "$MATRIX_TOKEN" ]; then
+    echo "matrix token is required"
+    exit 1
+fi
+
 export today=$(date +%Y-%m-%d)
 export yesterday=$(date +%Y-%m-%d -d yesterday)
 rm -f /tmp/*$REPORT_SUFFIX
