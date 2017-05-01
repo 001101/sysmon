@@ -7,6 +7,7 @@ CONFD=${LOCATION}conf.d
 REPORT_SUFFIX=".monitor"
 WEEKLY=1
 TRIGGER_HOUR=12
+IS_ENABLED=1
 
 if [ -e "$COMMON" ]; then
     source $COMMON
@@ -52,5 +53,15 @@ function service-enabled()
     systemctl is-enabled $1 | grep -q "enabled"
     if [ $? -ne 0 ]; then
         report-item $1 "service not enabled..."
+    fi
+}
+
+# check if a script is configured
+function is-conf-configured()
+{
+    if type is-conf-enabled &> /dev/null; then
+        is-conf-enabled $1
+    else
+        echo $IS_ENABLED
     fi
 }

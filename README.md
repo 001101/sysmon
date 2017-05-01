@@ -50,4 +50,4 @@ review the [readme](settings/README.md) for more information on the values withi
 
 ## disabling configurations
 
-all scripts in `conf.d` that end in `*.sh` are executed unless the local config sets. Each script will execute a function `is-configured` which can call an existing function (if defined) called `is-enabled` which should return $IS_ENABLED when enabled
+all scripts in `conf.d` that end in `*.sh` are executed unless the local config sets. Each script will execute a function `is-conf-configured` which can call an existing function (if defined) called `is-conf-enabled` which should return $IS_ENABLED when enabled

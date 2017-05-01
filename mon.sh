@@ -21,6 +21,11 @@ export yesterday=$(date +%Y-%m-%d -d yesterday)
 rm -f /tmp/*$REPORT_SUFFIX
 report=$(mktemp --suffix "$REPORT_SUFFIX")
 for conf in $(find $CONFD -type f -name "*.sh"); do
+    enabled=$(is-conf-configured $(basename $conf | sed "s/.sh//g"))
+    if [ $enabled -ne $IS_ENABLED ]; then
+        continue
+    fi
+    echo "running $conf"
     $conf $USE_CORE | sed "s/^/$named -> /g" >> $report
 done
 
