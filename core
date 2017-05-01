@@ -5,6 +5,7 @@ COMMON=${CONFIG}common
 LOCAL=${CONFIG}local
 CONFD=${LOCATION}conf.d
 REPORT_SUFFIX=".monitor"
+WEEKLY=1
 
 if [ -e "$COMMON" ]; then
     source $COMMON
