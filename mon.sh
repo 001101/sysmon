@@ -1,6 +1,7 @@
 #!/bin/bash
 source $USE_CORE
 export today=$(date +%Y-%m-%d)
+export yesterday=$(date +%Y-%m-%d -d yesterday)
 rm -f /tmp/*$REPORT_SUFFIX
 report=$(mktemp --suffix "$REPORT_SUFFIX")
 for conf in $(find $CONFD -type f -name "*.sh"); do
