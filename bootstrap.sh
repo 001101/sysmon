@@ -5,4 +5,7 @@ source $USE_CORE
 if type git &> /dev/null; then
     cd ${LOCATION} && git pull
 fi
-${LOCATION}mon.sh
+hour=$(date +%H)
+if [ $hour -eq $TRIGGER_HOUR ]; then
+    ${LOCATION}mon.sh
+fi
