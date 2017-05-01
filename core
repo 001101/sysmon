@@ -6,7 +6,7 @@ LOCAL=${CONFIG}local
 CONFD=${LOCATION}conf.d
 REPORT_SUFFIX=".monitor"
 WEEKLY=1
-TRIGGER_HOUR=14
+TRIGGER_HOUR=12
 
 if [ -e "$COMMON" ]; then
     source $COMMON
