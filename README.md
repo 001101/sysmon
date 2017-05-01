@@ -10,7 +10,7 @@ running as root
 cd /opt
 git clone https://github.com/epiphyte/system-monitor
 cd system-monitor
-make install
+./configure
 ```
 
 # updating
