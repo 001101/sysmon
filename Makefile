@@ -3,9 +3,6 @@ SETTINGS=$(INSTALL)settings/
 .PHONY: install
 
 install:
-	cd /opt
-	git clone https://github.com/epiphyte/system-monitor
-	cd system-monitor
 	systemctl enable $(INSTALL)service/system-monitor.timer
 	ln -s $(INSTALL)service/system-monitor.service /etc/systemd/system/
 	systemctl daemon-reload
