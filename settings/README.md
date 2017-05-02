@@ -36,4 +36,4 @@ monitor_disabled="iptables|journal"
 | rule | var | description |
 | ---- | --- | ----------- |
 | journal | journal_ignore | ignore journal lines matching these values |
-
+| procs | proc_names | process names to check for as running |
