@@ -1,5 +1,6 @@
 #!/bin/bash
 source $1
+except=$nspawn_exceptions
 for image in $(machinectl list-images | tail -n +2 | head -n -1 | cut -d " " -f 1); do
     machinectl status $image &> /dev/null
     if [ $? -ne 0 ]; then
