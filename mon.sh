@@ -46,7 +46,7 @@ if [ -s $report ]; then
     do_report=$do_report"
 ===/end $HOSTNAME==="
     do_report=$do_report"
-processed $rules "
+processed $rules on $HOSTNAME"
     reporting=1
 else
     echo "$report is empty (ran: $rules)"
