@@ -27,7 +27,7 @@ for conf in $(find $CONFD -type f -name "*.sh"); do
     if [ $enabled -ne $IS_ENABLED ]; then
         continue
     fi
-    rules=$rules" "$conf
+    rules=$rules" "$named
     echo "running $conf"
     $conf $USE_CORE | sed "s/^/$named -> /g" >> $report
 done
