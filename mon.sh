@@ -35,7 +35,7 @@ done
 do_report="$HOSTNAME checked"
 reporting=0
 if [ -s $report ]; then
-    do_report="processed rules: $rules "
+    do_report="processed $rules "
     for r in $(cat $report | cut -d " " -f 1 | uniq | sort); do
         do_report=$do_report" "$r
     done
@@ -51,7 +51,7 @@ else
     echo "$report is empty (ran: $rules)"
     check=$(date +%u)
     if [ $check == $WEEKLY ]; then
-        do_report=$do_report" executed ($rules)"
+        do_report=$do_report" $rules"
         reporting=1
     fi
 fi
