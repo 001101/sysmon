@@ -35,7 +35,7 @@ done
 do_report="$HOSTNAME checked"
 reporting=0
 if [ -s $report ]; then
-    do_report=""
+    do_report="processed rules: $rules "
     for r in $(cat $report | cut -d " " -f 1 | uniq | sort); do
         do_report=$do_report" "$r
     done
