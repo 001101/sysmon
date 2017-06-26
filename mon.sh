@@ -16,6 +16,7 @@ if [ -z "$MATRIX_TOKEN" ]; then
     exit 1
 fi
 
+rules="rules:"
 export today=$(date +%Y-%m-%d)
 export yesterday=$(date +%Y-%m-%d -d yesterday)
 rm -f /tmp/*$REPORT_SUFFIX
@@ -26,6 +27,7 @@ for conf in $(find $CONFD -type f -name "*.sh"); do
     if [ $enabled -ne $IS_ENABLED ]; then
         continue
     fi
+    rules=$rules" "$conf
     echo "running $conf"
     $conf $USE_CORE | sed "s/^/$named -> /g" >> $report
 done
@@ -46,9 +48,10 @@ if [ -s $report ]; then
 ===/end $HOSTNAME==="
     reporting=1
 else
-    echo "$report is empty"
+    echo "$report is empty (ran: $rules)"
     check=$(date +%u)
     if [ $check == $WEEKLY ]; then
+        do_report=$do_report" executed ($rules)"
         reporting=1
     fi
 fi
