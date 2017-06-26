@@ -37,13 +37,13 @@ if [ -s $report ]; then
     for r in $(cat $report | cut -d " " -f 1 | uniq | sort); do
         do_report=$do_report" "$r
     done
-    do_report=$do_report"
-\`\`\`"
-    do_report=$do_report"
-"$(cat $report | head -n 5)
-    do_report=$do_report"
-\`\`\`"
     do_report="monitor alerted: "$(echo $HOSTNAME)" -> "$(echo $do_report | sed "s/ /,/g")
+    do_report=$do_report"
+===$HOSTNAME (first $HEAD)==="
+    do_report=$do_report"
+"$(cat $report | head -n $HEAD)
+    do_report=$do_report"
+===/end $HOSTNAME==="
     reporting=1
 else
     echo "$report is empty"
@@ -53,7 +53,10 @@ else
     fi
 fi
 if [ $reporting -eq 1 ]; then
-    use_perl="use JSON: print(encode_json {\"body\" => \"$do_report\", \"msgtype\":\"m.texs\"});"
-    as_json=(perl -e "$use_perl")
+    echo "$do_report"
+    use_perl="use JSON; print(encode_json {\"body\" => \"$do_report\"}); print(\".{\\\"msgtype\\\":\\\"m.text\\\"}\");"
+    as_json=$(perl -e "$use_perl")
+    as_json=$(echo $as_json | sed "s/}.{/,/g")
+    echo $as_json
     curl -XPOST -d "$as_json" "$MATRIX_API/_matrix/client/r0/rooms/$MATRIX_ROOM/send/m.room.message?access_token=$MATRIX_TOKEN"
 fi
