@@ -13,6 +13,11 @@ cd system-monitor
 ./configure
 ```
 
+after making sure local settings are configured, run a force execution
+```
+/opt/system-monitor/bootstrap.sh force
+```
+
 # updating
 
 due to the bootstrap.sh script firing first, new rules will be automatically deployed, only settings need to be pushed
