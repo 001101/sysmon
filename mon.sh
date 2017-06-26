@@ -35,7 +35,6 @@ done
 do_report="$HOSTNAME checked"
 reporting=0
 if [ -s $report ]; then
-    do_report="processed $rules "
     for r in $(cat $report | cut -d " " -f 1 | uniq | sort); do
         do_report=$do_report" "$r
     done
@@ -46,6 +45,8 @@ if [ -s $report ]; then
 "$(cat $report | head -n $HEAD)
     do_report=$do_report"
 ===/end $HOSTNAME==="
+    do_report=$do_report"
+processed $rules "
     reporting=1
 else
     echo "$report is empty (ran: $rules)"
