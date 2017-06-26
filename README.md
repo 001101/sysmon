@@ -5,7 +5,9 @@ system monitoring assistant to get notified of system issues without manual inte
 
 # install
 
-running as root
+make sure to enable the epiphyte repository and install the [epiphyte-servers](https://github.com/epiphyte/servers) packages
+
+having installed that package, running as root
 ```
 cd /opt
 git clone https://github.com/epiphyte/system-monitor
