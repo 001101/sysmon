@@ -18,6 +18,8 @@ after making sure local settings are configured, run a force execution
 /opt/system-monitor/bootstrap.sh force
 ```
 
+> note, perl-json is a depndency if you're in a container that has system-monitor bound.
+
 # updating
 
 due to the bootstrap.sh script firing first, new rules will be automatically deployed, only settings need to be pushed
