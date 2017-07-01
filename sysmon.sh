@@ -79,12 +79,12 @@ _containers() {
 }
 
 _all() {
-    echo "sysmon starting..."
+    echo "sysmon starting $(HOSTNAME)..."
     _etcgit
     _iptables
     _journalerr
     _containers
-    echo "sysmon completed."
+    echo "sysmon completed $(HOSTNAME)."
 }
 
 _all 2>&1 | tee >(smirc)
