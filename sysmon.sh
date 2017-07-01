@@ -95,4 +95,4 @@ if [ ! -z "$IGNORES" ]; then
     pattern="$IGNORES"
 fi
 
-_all 2>&1 | grep $flag $pattern | tee >(smirc)
+_all 2>&1 | grep $flag "$pattern" | tee >(smirc)
