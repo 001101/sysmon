@@ -85,4 +85,4 @@ _all() {
     _containers
 }
 
-_all 2>&1 | smirc
+_all 2>&1 | tee >(smirc)

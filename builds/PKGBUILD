@@ -1,14 +1,15 @@
 pkgname=sysmon
-pkgrel=1
+pkgrel=2
 pkgdesc='System monitoring/configuration checking'
 url='https://github.com/epiphyte/system-monitor'
 license=('MIT')
 depends=('smirc')
+makedepends=('git')
 source=("git+$url")
 sha256sums=('SKIP')
 
 package() {
-  cd ${srcdir}/$pkgname
+  cd ${srcdir}/system-monitor
   install -Dm 755 sysmon.sh ${pkgdir}/usr/bin/sysmon
   install -Dm 644 service/sysmon.timer ${pkgdir}/usr/lib/systemd/system/sysmon.timer
   install -Dm 644 service/sysmon.service ${pkgdir}/usr/lib/systemd/system/sysmon.service
