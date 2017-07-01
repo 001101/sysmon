@@ -1,5 +1,5 @@
 pkgname=sysmon
-pkgrel=2
+pkgrel=3
 pkgdesc='System monitoring/configuration checking'
 url='https://github.com/epiphyte/system-monitor'
 license=('MIT')
