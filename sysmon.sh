@@ -1,4 +1,5 @@
 #!/bin/bash
+source /etc/epiphyte.d/sysmon.conf
 
 # file checking
 CHECK_SIZE=1
@@ -79,12 +80,19 @@ _containers() {
 }
 
 _all() {
-    echo "sysmon starting $HOSTNAME..."
+    echo "sysmon starting ($HOSTNAME)..."
     _etcgit
     _iptables
     _journalerr
     _containers
-    echo "sysmon completed $HOSTNAME."
+    echo "sysmon completed ($HOSTNAME)."
 }
 
-_all 2>&1 | tee >(smirc)
+pattern=""
+flag=""
+if [ ! -z "$IGNORES" ]; then
+    flag="-v"
+    pattern="$IGNORES"
+fi
+
+_all 2>&1 | grep $flag $pattern | tee >(smirc)
