@@ -3,4 +3,4 @@ Description=System monitoring and configuration checking service
 
 [Service]
 Type=oneshot
-ExecStart=/opt/system-monitor/bootstrap.sh
+ExecStart=/usr/bin/sysmon
