@@ -1,5 +1,6 @@
 #!/bin/bash
 source /etc/epiphyte.d/sysmon.conf
+OUTPUT=/tmp/sysmon.last
 
 # file checking
 CHECK_SIZE=1
@@ -41,9 +42,7 @@ function service-enabled()
 }
 
 _etcgit() {
-    if [ ! -d /etc/.git ]; then
-        echo "not etc git controlled..."
-    else
+    if [ -d /etc/.git ]; then
         cd /etc && git diff-index --name-only HEAD --
         cd /etc && git status -sb | grep 'ahead'
     fi
@@ -80,12 +79,10 @@ _containers() {
 }
 
 _all() {
-    echo "sysmon starting ($HOSTNAME)..."
     _etcgit
     _iptables
     _journalerr
     _containers
-    echo "sysmon completed ($HOSTNAME)."
 }
 
 pattern=""
@@ -95,4 +92,7 @@ if [ ! -z "$IGNORES" ]; then
     pattern="$IGNORES"
 fi
 
-_all 2>&1 | grep $flag "$pattern" | tee >(smirc)
+_all 2>&1 | grep $flag "$pattern" > $OUTPUT
+if [ -s $OUTPUT ]; then
+    echo "sysmon errors reported" | smirc
+fi
