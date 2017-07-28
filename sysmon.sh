@@ -96,4 +96,6 @@ _all 2>&1 | grep $flag "$pattern" > $OUTPUT
 if [ -s $OUTPUT ]; then
     echo "sysmon errors reported" | smirc
     cat $OUTPUT | smirc --private
+else
+    echo "sysmon completed successfully" | smirc --private
 fi
