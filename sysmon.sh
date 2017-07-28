@@ -66,7 +66,10 @@ _journalerr() {
     if [ $comp_last -gt $comp_yest ]; then
         use_since="$last_reboot"
     fi
-    journalctl -p err --since "$use_since" --until "$today 12:00:00" | tail -n +2 | grep -v "\-\- Reboot \-\-" 
+    has_until=$(date -d $(echo "${today}T12:00:00"))
+    if [ $use_since -lt $has_until ]; then
+        journalctl -p err --since "$use_since" --until "$today 12:00:00" | tail -n +2 | grep -v "\-\- Reboot \-\-"     
+    fi
 }
 
 _containers() {
