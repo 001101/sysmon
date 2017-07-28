@@ -68,7 +68,7 @@ _journalerr() {
         use_since="$last_reboot"
         use_comp=$comp_last
     fi
-    has_until=$(date -d $(echo "${today}T12:00:00"))
+    has_until=$(date -d $(echo "${today}T12:00:00") +%s)
     if [ $use_comp -lt $has_until ]; then
         journalctl -p err --since "$use_since" --until "$today 12:00:00" | tail -n +2 | grep -v "\-\- Reboot \-\-"     
     fi
