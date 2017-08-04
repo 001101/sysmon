@@ -83,11 +83,19 @@ _containers() {
     done
 }
 
+_disk_use() {
+    _usage=$(df -h / | sed "s/ \+/ /g" | cut -d " " -f 5 | tail -n +2 | sed "s/%//g")
+    if [ $_usage -gt 70 ]; then
+        echo "disk usage at $_usage exceeds threshold"
+    fi
+}
+
 _all() {
     _etcgit
     _iptables
     _journalerr
     _containers
+    _disk_use
 }
 
 pattern=""
