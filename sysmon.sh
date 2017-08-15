@@ -1,6 +1,7 @@
 #!/bin/bash
 source /etc/epiphyte.d/sysmon.conf
 OUTPUT=/tmp/sysmon.last
+LAST_RAN=/var/tmp/sysmon.lastran
 
 # file checking
 CHECK_SIZE=1
@@ -90,12 +91,27 @@ _disk_use() {
     fi
 }
 
+_last_ran() {
+    if [ -e $LAST_RAN ]; then
+        for l in $(cat $LAST_RAN); do
+            name=$(echo $l | cut -d "=" -f 1)
+            date=$(echo $l | cut -d "=" -f 2)
+            date=$(date -d $date +%s)
+            week=$(date -d "7 days ago" +%s)
+            if [ $date -lt $week ]; then
+                echo "$name has not recently run"
+            fi
+        done
+    fi
+}
+
 _all() {
     _etcgit
     _iptables
     _journalerr
     _containers
     _disk_use
+    _last_ran
 }
 
 pattern=""
