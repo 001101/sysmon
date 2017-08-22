@@ -2,6 +2,7 @@
 source /etc/epiphyte.d/sysmon.conf
 OUTPUT=/tmp/sysmon.last
 LAST_RAN=/var/tmp/sysmon.lastran
+NAME="sysmon (_VERSION_)"
 
 # file checking
 CHECK_SIZE=1
@@ -140,8 +141,8 @@ fi
 
 _all 2>&1 | grep $flag "$pattern" > $OUTPUT
 if [ -s $OUTPUT ]; then
-    echo "sysmon errors reported" | smirc
+    echo "$NAME errors reported" | smirc
     cat $OUTPUT | smirc --private
 else
-    echo "sysmon completed successfully" | smirc --private
+    echo "$NAME completed successfully" | smirc --private
 fi
