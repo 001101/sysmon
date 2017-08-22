@@ -57,6 +57,22 @@ _iptables() {
     fi
 }
 
+
+_pids() {
+    cnt=$(pidof $1 | sed "s/ /\n/g" | wc -l)
+    if [ $cnt -gt $2 ]; then
+        echo "$1 has $cnt processes (exceeds $2)"
+    fi
+}
+
+_smbd() {
+    _pids "smbd" 20
+}
+
+_processes() {
+    _smbd
+}
+
 _journalerr() {
     today=$(date +%Y-%m-%d)
     yesterday=$(date +%Y-%m-%d -d yesterday)
@@ -112,6 +128,7 @@ _all() {
     _containers
     _disk_use
     _last_ran
+    _processes
 }
 
 pattern=""
