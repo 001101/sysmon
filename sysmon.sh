@@ -66,12 +66,14 @@ _pids() {
     fi
 }
 
-_smbd() {
-    _pids "smbd" 20
-}
-
 _processes() {
-    _smbd
+    if [ ! -z "PROCESS_PIDS" ]; then
+        for p in $(echo "$PROCESS_PIDS"); do
+            p_name=$(echo $p | cut -d ":" -f 1)
+            p_cnt=$(echo $p | cut -d ":" -f 2)
+            _pids "$p_name" "$p_cnt"
+        done
+    fi
 }
 
 _journalerr() {
