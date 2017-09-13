@@ -35,12 +35,28 @@ function not-empty()
 }
 
 # service enabled
+function service-is()
+{
+    systemctl is-enabled $1 | grep -q "$2"
+    if [ $? -ne 0 ]; then
+        report-item $1 "service not $2..."
+    fi
+}
+
 function service-enabled()
 {
-    systemctl is-enabled $1 | grep -q "enabled"
-    if [ $? -ne 0 ]; then
-        report-item $1 "service not enabled..."
-    fi
+    service-is $1 "enabled"
+}
+
+function service-disabled()
+{
+    service-is $1 "disabled"
+}
+
+_disabled()
+{
+    service-disabled "systemd-resolved"
+    service-disabled "ntpd"
 }
 
 _etcgit() {
@@ -132,6 +148,7 @@ _all() {
     _disk_use
     _last_ran
     _processes
+    _disabled
 }
 
 pattern=""
