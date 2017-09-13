@@ -1,4 +1,4 @@
-system-monitor
+sysmon
 ===
 
 system monitoring assistant to get notified of system issues without manual intervention
@@ -9,7 +9,7 @@ make sure to enable the epiphyte [repository](https://github.com/epiphyte/server
 pacman -S sysmon
 ```
 
-* make sure smirc is configure
+* make sure smirc is configured
 
 enable the service
 ```
