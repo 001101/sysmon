@@ -56,7 +56,10 @@ function service-disabled()
 _disabled()
 {
     service-disabled "systemd-resolved"
-    service-disabled "ntpd"
+    pacman -Qi ntp > /dev/null
+    if [ $? -eq 0 ]; then
+        service-disabled "ntpd"
+    fi
 }
 
 _etcgit() {
