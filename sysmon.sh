@@ -56,7 +56,7 @@ function service-disabled()
 _disabled()
 {
     service-disabled "systemd-resolved"
-    pacman -Qi ntp > /dev/null
+    pacman -Qi ntp &> /dev/null
     if [ $? -eq 0 ]; then
         service-disabled "ntpd"
     fi
