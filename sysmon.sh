@@ -64,6 +64,7 @@ _disabled()
 
 _etcgit() {
     if [ -d /etc/.git ]; then
+        cd /etc && git update-index -q --refresh
         cd /etc && git diff-index --name-only HEAD --
         cd /etc && git status -sb | grep 'ahead'
     fi
