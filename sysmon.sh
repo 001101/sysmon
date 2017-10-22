@@ -43,6 +43,11 @@ function service-is()
     fi
 }
 
+_pacmanconf()
+{
+    cat /etc/pacman.conf | grep -v "^#" | grep -v "^$" | grep http | grep "http:"
+}
+
 function service-enabled()
 {
     service-is $1 "enabled"
@@ -153,6 +158,7 @@ _all() {
     _last_ran
     _processes
     _disabled
+    _pacmanconf
 }
 
 pattern=""
