@@ -75,6 +75,13 @@ _etcgit() {
     fi
 }
 
+_btrfs() {
+    _nspawn=$(systemd-detect-virt)
+    if [[ $_nspawn != "systemd-nspawn" ]]; then
+        service-enabled btrfs-maintain-monthly.timer
+    fi
+}
+
 _iptables() {
     _nspawn=$(systemd-detect-virt)
     if [[ $_nspawn != "systemd-nspawn" ]]; then
@@ -159,6 +166,7 @@ _all() {
     _processes
     _disabled
     _pacmanconf
+    _btrfs
 }
 
 pattern=""
