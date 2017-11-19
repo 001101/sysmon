@@ -172,7 +172,7 @@ _all() {
 pattern=""
 flag=""
 if [ ! -z "$IGNORES" ]; then
-    flag="-v"
+    flag="-v -E"
     pattern="$IGNORES"
 fi
 
